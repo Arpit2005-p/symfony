@@ -1,0 +1,22 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}
+	<title>Contact</title>
+{% endblock %}
+
+{% block body %}
+
+<div class="container">
+	<h2>Contact Form</h2>
+
+	{% for label, messages in app.flashes(['success', 'error']) %}
+		{% for message in messages %}
+			<div class="flash-{{ label }}">{{ message }}</div>
+		{% endfor %}
+	{% endfor %}
+	
+    {{ form_start(form, {'attr': {'novalidate': 'novalidate'}}) }}
+	{{ form_widget(form) }}
+	{{ form_end(form) }}
+</div>
+{% endblock %}

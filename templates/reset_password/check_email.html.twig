@@ -1,0 +1,26 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}
+	<title>Password Reset Email Sent</title>
+{% endblock %}
+
+{% block body %}
+	
+	<h1>Check email</h1>
+
+	{% if token is defined and token %}
+		<p>
+			Click this link to reset your password:<br>
+			<a class="btn btn-success mt-2" href="{{ path('app_reset_password', { resetToken: resetToken }) }}">
+				Reset Password.
+			</a>
+		</p>
+	{% else %}
+		<p>No token found. Try again.</p>
+	{% endif %}
+
+	<p class="mt-3">
+	<div class="container">
+		<a href="{{ path('app_login') }}">Back to Login</a>
+	</p>
+{% endblock %}

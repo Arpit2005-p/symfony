@@ -1,0 +1,43 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}
+    <title>{{ isEdit ? 'Edit User' : 'New User' }}</title>
+{% endblock %}
+    
+{% block body %}
+<div class="container mt-5">
+    <div class="card shadow">
+        <div class="card-body">
+
+            <h3 class="mb-4">
+                {{ isEdit ? 'Edit User' : 'Add New User' }}
+            </h3>
+
+            {{ form_start(form) }}
+
+            <div class="mb-3">
+                {{ form_label(form.name) }}
+                {{ form_widget(form.name, {'attr': {'class': 'form-control'}}) }}
+                {{ form_errors(form.name) }}
+            </div>
+
+            <div class="mb-3">
+                {{ form_label(form.email) }}
+                {{ form_widget(form.email, {'attr': {'class': 'form-control'}}) }}
+                {{ form_errors(form.email) }}
+            </div>
+
+            <button class="btn btn-primary">
+                {{ isEdit ? 'Update' : 'Save' }}
+            </button>
+
+            <a href="{{ path('app_user') }}" class="btn btn-secondary ms-2">
+                Back
+            </a>
+
+            {{ form_end(form) }}
+
+        </div>
+    </div>
+</div>
+{% endblock %}

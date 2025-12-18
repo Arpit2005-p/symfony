@@ -1,0 +1,135 @@
+/* Reset */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+/* Body */
+body {
+    font-family: 'Open Sans', sans-serif;
+    background: #f0f4f8;
+    color: #333;
+    scroll-behavior: smooth;
+}
+
+/* Navbar */
+.navbar {
+    background: linear-gradient(90deg, #6a11cb, #2575fc);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 18px 40px;
+    box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+}
+
+.logo {
+    color: #fff;
+    font-size: 1.8em;
+    font-weight: 700;
+    letter-spacing: 1px;
+}
+
+.nav-links {
+    list-style: none;
+    display: flex;
+    gap: 25px;
+}
+
+.nav-links a {
+    color: #fff;
+    text-decoration: none;
+    font-weight: 500;
+    font-size: 1em;
+    transition: all 0.3s ease;
+}
+
+.nav-links a:hover {
+    color: #ffd166;
+    transform: translateY(-2px);
+}
+
+/* Sections */
+.section {
+    max-width: 1000px;
+    margin: 60px auto;
+    background: #fff;
+    padding: 60px 30px;
+    border-radius: 10px;
+    box-shadow: 0 5px 15px rgba(0,0,0,0.08);
+    text-align: center;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.section:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 10px 25px rgba(0,0,0,0.12);
+}
+
+.section h1,
+.section h2 {
+    color: #2575fc;
+    margin-bottom: 20px;
+}
+
+.section p {
+    color: #555;
+    line-height: 1.7;
+    font-size: 1.05em;
+}
+
+/* Menu List */
+.menu-list {
+    list-style: none;
+    margin-top: 25px;
+}
+
+.menu-list li {
+    padding: 12px;
+    font-size: 1.1em;
+    color: #333;
+    background: #f8faff;
+    border-radius: 6px;
+    margin: 8px auto;
+    width: 60%;
+    transition: background 0.3s, transform 0.2s;
+}
+
+.menu-list li:hover {
+    background: #e3ecff;
+    transform: scale(1.03);
+}
+
+/* Footer */
+footer {
+    background: #1b1b1b;
+    color: #ccc;
+    text-align: center;
+    padding: 20px;
+    margin-top: 60px;
+    font-size: 0.95em;
+
+}
+
+footer p {
+    color: #aaa;
+}
+    
+/* Responsive */
+@media (max-width: 768px) {
+    .navbar {
+        flex-direction: column;
+        text-align: center;
+        gap: 10px;
+    }
+
+    .nav-links {
+        flex-direction: column;
+        gap: 12px;
+    }
+
+    .menu-list li {
+        width: 90%;
+    }
+}
+
