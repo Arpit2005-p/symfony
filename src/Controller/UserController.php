@@ -59,7 +59,7 @@ final class UserController extends AbstractController
         EntityManagerInterface $em,
         UserPasswordHasherInterface $passwordHasher,
         User|null $user = null
-    ): Response {
+        ): Response {
         $isNew = false;
 
         //  NEW USER
