@@ -22,3 +22,20 @@ services:
 
     # add more service definitions when explicit configuration is needed
     # please note that last definitions always *replace* previous ones
+
+    admin.user:
+        class: App\Admin\UserAdmin
+        tags:
+            - { name: sonata.admin, model_class: App\Entity\User, controller: ~, manager_type: orm, group: management, label: User ,}
+
+    admin.employee:
+        class: App\Admin\EmployeeAdmin
+        calls:
+            - [setPasswordHasher, ['@security.password_hasher']]
+        tags:
+            - { name: sonata.admin, model_class: App\Entity\Employee, controller: ~, manager_type: orm, group: Employee, label: Employee }
+
+    admin.image:
+        class: App\Admin\ImageAdmin
+        tags:
+            - { name: sonata.admin, model_class: App\Entity\Image, controller: ~, manager_type: orm, group: Employee, label: Image }

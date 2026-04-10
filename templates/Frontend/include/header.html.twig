@@ -1,0 +1,40 @@
+<header id="header">
+	<div class="container">
+		<a href={{ path('app_home') }} id="logo" title="Demo’s jewelry">Demo's jewelry</a>
+		<div class="right-links">
+			<ul>
+				<li>
+					<a href={{ path('app_cart') }}>
+						<span class="ico-products"></span>3 products, $4 500.00</a>
+				</li>
+				<li>
+					<a href="#">
+						<span class="ico-account"></span>Account</a>
+				</li>
+				{% if app.user %}
+					<li>
+						<a href={{ path('app_logout') }}>
+							<span class="ico-signout"></span>Sign out</a>
+					</li>
+					{# <li>
+																<a href={{ path('app_change_password') }}>Change Password</a>
+															</li>
+															<li>
+																<a href={{ path('app_user') }}>User</a>
+															</li>#}
+				{% else %}
+					<li>
+						<a href={{ path('app_login') }}>
+							<span class="ico-signout"></span>Sign in</a>
+					</li>
+					{# <li>
+																<a href={{ path('app_register') }}>Register</a>
+															</li> #}
+
+				{% endif %}
+
+			</ul>
+		</div>
+	</div>
+	<!-- / container -->
+</header>

@@ -1,0 +1,70 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}
+	<title>ring Collection</title>
+{% endblock %}
+
+{% block body %}
+	<div class="container mt-4">
+		<h2 class="text-center mb-4">Ring Collection</h2>
+
+		<div class="row">
+			{% for product in products %}
+				<div class="col-md-3 mb-4">
+					<div class="card shadow">
+                        <img src="/image/ring.jpg" class="card-img-top" alt="ring">
+							<div class="card-body text-center">
+							<h5 class="card-title">{{ product.name }}</h5>
+							<p>₹{{ product.price }}</p>
+
+							<button class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#productModal{{ product.id }}">View Details</button>
+
+							<!-- NEW BUTTON -->
+							<a href="{{ path('app_ring_detail', {'id': product.id}) }}" class="btn btn-dark mt-2">
+								More Details
+							</a>
+						</div>
+					</div>
+				</div>
+
+				<!-- Modal -->
+				<div class="modal fade" id="productModal{{ product.id }}" tabindex="-1">
+					<div class="modal-dialog modal-lg">
+						<div class="modal-content">
+
+							<div class="modal-header">
+								<h5 class="modal-title">{{ product.name }}</h5>
+								<button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+							</div>
+
+							<div class="modal-body">
+								<div class="row">
+									<div class="col-md-6">
+										<img src="/image/ring.jpg" class="img-fluid">
+									</div>
+
+									<div class="col-md-6">
+										<p><b>Referance:</b>{{ product.referance }}</p>
+										<p><b>Price:</b>{{ product.price }}</p>
+										<p><b>Status:</b>{{ product.status ? 'Available' : 'Out of stock' }}</p>
+										<p><b>Category:</b>{{ product.category.name }}</p>
+
+                                    <hr>
+									</div>
+								</div>
+							</div>
+
+							<div class="modal-footer">
+								<button class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+							</div>
+
+						</div>
+					</div>
+				</div>
+
+			{% else %}
+				<p class="text-center">No rings found.</p>
+			{% endfor %}
+		</div>
+	</div>
+{% endblock %}

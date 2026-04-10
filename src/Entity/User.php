@@ -3,6 +3,8 @@
 namespace App\Entity;
 
 use App\Repository\UserRepository;
+use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
 use Symfony\Component\Security\Core\User\PasswordAuthenticatedUserInterface;
@@ -17,11 +19,11 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
 {
     #[ORM\Id]
     #[ORM\GeneratedValue]
-    #[ORM\Column]
+    #[ORM\Column]           
     private ?int $id = null;    
    
     #[ORM\Column(length: 180)]
-    private ?string $email = null;
+    private ?string $email = null;  
 
     /**
      * @var list<string> The user roles
@@ -49,6 +51,20 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
 
     #[ORM\Column]
     private ?bool $deleted = null;
+
+    /**
+     * @var Collection<int, UserOrder>
+     */
+    #[ORM\OneToMany(targetEntity: UserOrder::class, mappedBy: 'user', orphanRemoval: true)]
+    private Collection $userOrders;
+
+    #[ORM\OneToOne(mappedBy: 'user', cascade: ['persist', 'remove'])]
+    private ?Employee $employee = null;
+
+    public function __construct()
+    {
+        $this->userOrders = new ArrayCollection();
+    }
 
     public function getId(): ?int
 
@@ -152,6 +168,12 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
         $this->updated = new \DateTime();
     }
 
+     #[ORM\PreUpdate]
+    public function setUpdatedValue(): void
+    {
+        $this->updated = new \DateTime();
+    }
+
     public function getName(): ?string
     {
         return $this->name;
@@ -186,4 +208,57 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
 
         return $this;
     }
+
+    /**
+     * @return Collection<int, UserOrder>
+     */
+    public function getUserOrders(): Collection
+    {
+        return $this->userOrders;
+    }
+
+    public function addUserOrder(UserOrder $userOrder): static
+    {
+        if (!$this->userOrders->contains($userOrder)) {
+            $this->userOrders->add($userOrder);
+            $userOrder->setUser($this);
+        }
+
+        return $this;
+    }
+
+    public function removeUserOrder(UserOrder $userOrder): static
+    {
+        if ($this->userOrders->removeElement($userOrder)) {
+            // set the owning side to null (unless already changed)
+            if ($userOrder->getUser() === $this) {
+                $userOrder->setUser(null);
+            }
+        }
+
+        return $this;
+    }
+
+    public function getAllRolesAsString(): ?string
+    {
+        return implode(', ', $this->roles);
+    }
+
+    public function getEmployee(): ?Employee
+    {
+        return $this->employee;
+    }
+
+    public function setEmployee(Employee $employee): static
+    {
+        // set the owning side of the relation if necessary
+        if ($employee->getUser() !== $this) {
+            $employee->setUser($this);
+        }
+
+        $this->employee = $employee;
+
+        return $this;
+    }
 }
+    

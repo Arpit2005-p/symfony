@@ -9,19 +9,19 @@ use Symfony\Component\Routing\Attribute\Route;
 
 final class HomepageController extends AbstractController
 {
-   #[Route('/', name: 'app_home')]
+    #[Route('/', name: 'app_home')]
     public function app_home(): Response
     {
-         return $this->render('base.html.twig', [
+        return $this->render('/Frontend/home/index.html.twig', [
             'controller_name' => 'HomeController',
         ]);
-    }   
-    
-      #[Route('/home', name: 'app_index')]
+    }
+
+    #[Route('/home', name: 'app_index')]
     public function index(): Response
     {
-        return $this->render('home/index.html.twig', [
-            'controller_name' => 'AboutController',
+        return $this->render('/Frontend/home/index.html.twig', [
+            'controller_name' => 'HomeController',
         ]);
     }
 
@@ -34,7 +34,7 @@ final class HomepageController extends AbstractController
         ]);
     }
 
-     #[Route('/menu', name: 'app_menu')]
+    #[Route('/menu', name: 'app_menu')]
     public function menu(): Response
     {
         return $this->render('menu/index.html.twig', [
@@ -42,13 +42,20 @@ final class HomepageController extends AbstractController
         ]);
     }
 
-    
-      #[Route('/contact', name: 'app_contact')]
+
+    #[Route('/contact', name: 'app_contact')]
     public function contact(): Response
     {
         return $this->render('contact/index.html.twig', [
             'controller_name' => 'AboutController',
         ]);
     }
-       
+
+    #[Route('/cart', name: 'app_cart')]
+    public function cart(): Response
+    {
+        return $this->render('/Frontend/cart/cart.html.twig', [
+            'controller_name' => 'AboutController',
+        ]);
+    }
 }

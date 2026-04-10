@@ -80,6 +80,8 @@ class RegistrationFormType extends AbstractType
                 ],
             ])
 
+            
+
         ;
     }
 

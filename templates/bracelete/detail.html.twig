@@ -1,0 +1,35 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}
+<title>Bracelete Detail</title>
+{% endblock %}
+
+{% block body %}
+<div class="container mt-4">
+    <h2 class="text-center mb-4">{{ product.name }}</h2>
+
+    <div class="row">
+        <div class="col-md-6">
+            <img src="/image/bracelete.jpg" class="img-fluid">
+        </div>
+
+        <div class="col-md-6">
+            <p><b>Referance:</b> {{ product.referance }}</p>
+            <p><b>Price:</b> ₹ {{ product.price }}</p>
+            <p><b>Status:</b> {{ product.status ? 'Available' : 'Out of stock' }}</p>
+            <p><b>Category:</b> {{ product.category.name }}</p>
+
+            <hr>
+
+            {% if product.bracelete %}
+                <h5>Bracelete Details</h5>
+                <p><b>Length:</b> {{ product.bracelete.length }}</p>
+                <p><b>Type:</b> {{ product.bracelete.braceletetype }}</p>
+                <p><b>Adjustable:</b> {{ product.bracelete.adjustable ? 'Yes' : 'No' }}</p>
+            {% endif %}
+
+            <a href="{{ path('app_bracelete') }}" class="btn btn-secondary mt-3">Back</a>
+        </div>
+    </div>
+</div>
+{% endblock %}

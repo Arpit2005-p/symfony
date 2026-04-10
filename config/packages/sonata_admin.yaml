@@ -1,0 +1,25 @@
+sonata_admin:
+    title: 'Sonata Admin'
+
+    dashboard:
+        groups:
+            employee:
+                label: Employee Management
+                roles: [ROLE_EMPLOYEE_ADMIN, ROLE_ADMIN]
+                items:
+                    - admin.employee
+                    - admin.image
+
+            user:
+                label: User Management
+                roles: [ROLE_SUPER_ADMIN]
+                items:
+                    - admin.user
+
+        blocks:
+            - { type: sonata.admin.block.admin_list, position: left }
+
+sonata_block:
+    blocks:
+        sonata.admin.block.admin_list:
+            contexts: [admin]
